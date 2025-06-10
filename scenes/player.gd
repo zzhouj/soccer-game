@@ -8,13 +8,23 @@ enum ControlScheme {CPU, P1, P2}
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
-func _process(delta: float) -> void:
-	var direction = Input.get_vector("p1_left", "p1_right", "p1_up", "p1_down")
+
+func _process(_delta: float) -> void:
+	if control_scheme ==ControlScheme.CPU:
+		pass
+	else:
+		handle_player_movement()
+	set_movement_animation()
+	move_and_slide()
+
+
+func handle_player_movement() -> void:
+	var direction = KeyUtils.get_input_vector(control_scheme)
 	velocity = direction * speed
 
+
+func set_movement_animation() -> void:
 	if velocity.length() > 0:
 		animation_player.play("run")
 	else:
 		animation_player.play("idle")
-
-	move_and_slide()
