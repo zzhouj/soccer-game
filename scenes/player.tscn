@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://rkmpjyafcwb1"]
+[gd_scene load_steps=8 format=3 uid="uid://rkmpjyafcwb1"]
 
 [ext_resource type="Texture2D" uid="uid://cxagw6gk15u5k" path="res://assets/art/characters/soccer-player.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://heed2kho2ack" path="res://scenes/player.gd" id="1_g2els"]
 
 [sub_resource type="Animation" id="Animation_g2els"]
 resource_name = "idle"
@@ -65,6 +66,8 @@ radius = 4.0
 height = 18.0
 
 [node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g2els")
+speed = 80.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_3vyb7")
@@ -74,6 +77,7 @@ hframes = 6
 vframes = 13
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_dqkch")
 }
