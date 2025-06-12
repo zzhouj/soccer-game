@@ -23,11 +23,11 @@ func _process(_delta: float) -> void:
 	flip_sprites()
 	move_and_slide()
 
-func switch_state(state: State) -> void:
+func switch_state(state: State, state_data := PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 	current_state = state_factory.get_state(state)
-	current_state.setup(self, animation_player)
+	current_state.setup(self, ball, animation_player, state_data)
 	current_state.state_transition_requested.connect(switch_state.bind())
 	current_state.name = "PlayerState: " + str(state)
 	call_deferred("add_child", current_state)
@@ -52,3 +52,7 @@ func flip_sprites() -> void:
 
 func has_ball() -> bool:
 	return ball.carrier == self
+
+func on_animation_complete() -> void:
+	if current_state != null:
+		current_state.on_animation_complete()

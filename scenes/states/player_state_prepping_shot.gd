@@ -8,7 +8,7 @@ var shot_direction := Vector2.ZERO
 var time_start_shot := Time.get_ticks_msec()
 
 func _enter_tree() -> void:
-	animation_player.play("prep_shot")
+	animation_player.play("prep_kick")
 	player.velocity = Vector2.ZERO
 	time_start_shot = Time.get_ticks_msec()
 
@@ -20,4 +20,5 @@ func _process(delta: float) -> void:
 		var bonus := ease(ease_time, EASE_REWARD_FACTOR)
 		var shot_power := player.power * (1 + bonus)
 		shot_direction = shot_direction.normalized()
-		print(shot_power, shot_direction)
+		var new_state_data := PlayerStateData.build().set_shot_power(shot_power).set_shot_direction(shot_direction)
+		transition_state(Player.State.SHOOTING, new_state_data)
