@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 enum ControlScheme {CPU, P1, P2}
-enum State {MOVING, TACKLING, RECOVERING, PREPPING_SHOT, SHOOTING}
+enum State {MOVING, TACKLING, RECOVERING, PREPPING_SHOT, SHOOTING, PASSING}
 
 @export var control_scheme: ControlScheme
 @export var speed: float
@@ -11,6 +11,7 @@ enum State {MOVING, TACKLING, RECOVERING, PREPPING_SHOT, SHOOTING}
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var player_sprite: Sprite2D = %PlayerSprite
+@onready var teammate_detection_area: Area2D = %TeammateDetectionArea
 
 var current_state: PlayerState = null
 var state_factory := PlayerStateFactory.new()
@@ -27,7 +28,7 @@ func switch_state(state: State, state_data := PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 	current_state = state_factory.get_state(state)
-	current_state.setup(self, ball, animation_player, state_data)
+	current_state.setup(self, ball, animation_player, teammate_detection_area, state_data)
 	current_state.state_transition_requested.connect(switch_state.bind())
 	current_state.name = "PlayerState: " + str(state)
 	call_deferred("add_child", current_state)
