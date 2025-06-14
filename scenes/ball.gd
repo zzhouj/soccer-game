@@ -8,6 +8,8 @@ enum State {CARRIED, FREEFORM, SHOT}
 
 @export var friction_air: float
 @export var friction_ground: float
+@export var air_connect_min_height: float
+@export var air_connect_max_height: float
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var player_detection_area: Area2D = %PlayerDetectionArea
@@ -52,3 +54,9 @@ func pass_to(target: Vector2) -> void:
 
 func stop() -> void:
 	velocity = Vector2.ZERO
+
+func can_air_interact() -> bool:
+	return current_state != null and current_state.can_air_interact()
+
+func can_air_connect() -> bool:
+	return height > air_connect_min_height and height < air_connect_max_height

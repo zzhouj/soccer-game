@@ -7,10 +7,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxlvu"]
 radius = 5.0
 
-[sub_resource type="Animation" id="Animation_f7cbr"]
-resource_name = "idle"
-length = 0.1
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_4dx81"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -24,8 +22,10 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_4dx81"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_f7cbr"]
+resource_name = "idle"
+length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -73,6 +73,8 @@ sync_to_physics = false
 script = ExtResource("1_f7cbr")
 friction_air = 35.0
 friction_ground = 250.0
+air_connect_min_height = 10.0
+air_connect_max_height = 30.0
 
 [node name="BallSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true

@@ -19,6 +19,9 @@ func handle_player_movement() -> void:
 			transition_state(Player.State.PASSING)
 		elif KeyUtils.is_action_just_pressed(player.control_scheme, KeyUtils.Action.SHOOT):
 			transition_state(Player.State.PREPPING_SHOT)
-	else:
-		if player.velocity != Vector2.ZERO and KeyUtils.is_action_just_pressed(player.control_scheme, KeyUtils.Action.SHOOT):
-			transition_state(Player.State.TACKLING)
+	elif ball.can_air_interact():
+		if KeyUtils.is_action_just_pressed(player.control_scheme, KeyUtils.Action.SHOOT):
+			if player.velocity == Vector2.ZERO:
+				pass
+			else:
+				transition_state(Player.State.HEADER)
