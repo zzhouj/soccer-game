@@ -25,7 +25,7 @@ var height_velocity := 0.0
 func _ready() -> void:
 	switch_state(State.FREEFORM)
 
-func _process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	ball_sprite.position = Vector2.UP * height
 
 func switch_state(state: State) -> void:

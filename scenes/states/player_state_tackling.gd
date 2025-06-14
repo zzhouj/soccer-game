@@ -10,7 +10,7 @@ var time_finish_tackle := Time.get_ticks_msec()
 func _enter_tree() -> void:
 	animation_player.play("tackle")
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not is_tackle_complete:
 		player.velocity = player.velocity.move_toward(Vector2.ZERO, GROUND_FRICION * delta)
 		if player.velocity == Vector2.ZERO:

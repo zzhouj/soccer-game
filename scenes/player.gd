@@ -32,7 +32,7 @@ func _ready() -> void:
 	set_control_texture()
 	switch_state(State.MOVING)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	flip_sprites()
 	set_control_visibility()
 	process_gravity(delta)

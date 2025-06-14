@@ -15,6 +15,6 @@ func on_ball_entered(ctx_ball: Ball) -> void:
 	if ctx_ball.can_air_connect():
 		ctx_ball.shoot(player.velocity.normalized() * player.power * BONUS_POWER)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if player.height == 0:
 		transition_state(Player.State.RECOVERING)

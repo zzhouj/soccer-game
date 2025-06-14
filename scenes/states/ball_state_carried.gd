@@ -10,7 +10,7 @@ var dribble_time := 0.0
 func _enter_tree() -> void:
 	assert(carrier != null)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	dribble_time += delta
 	var vx := 0.0
 	if carrier.velocity != Vector2.ZERO:

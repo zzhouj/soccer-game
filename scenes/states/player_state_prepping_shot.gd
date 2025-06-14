@@ -13,7 +13,7 @@ func _enter_tree() -> void:
 	time_start_shot = Time.get_ticks_msec()
 	shot_direction = player.heading * 0.1
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	shot_direction += KeyUtils.get_input_vector(player.control_scheme) * delta
 	if KeyUtils.is_action_just_released(player.control_scheme, KeyUtils.Action.SHOOT):
 		var duration_press := clampf(Time.get_ticks_msec() - time_start_shot, 0.0, DURATION_MAX_BONUS)
