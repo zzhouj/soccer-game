@@ -42,8 +42,12 @@ y_sort_enabled = true
 [node name="PitchObjects" type="Node2D" parent="ActorsContainer"]
 y_sort_enabled = true
 
-[node name="Goal" parent="ActorsContainer/PitchObjects" instance=ExtResource("5_i7141")]
+[node name="GoalHome" parent="ActorsContainer/PitchObjects" instance=ExtResource("5_i7141")]
 position = Vector2(32, 220)
+
+[node name="GoalAway" parent="ActorsContainer/PitchObjects" instance=ExtResource("5_i7141")]
+position = Vector2(818, 220)
+scale = Vector2(-1, 1)
 
 [node name="Player" parent="ActorsContainer" node_paths=PackedStringArray("ball") instance=ExtResource("4_k0juu")]
 position = Vector2(144, 106)

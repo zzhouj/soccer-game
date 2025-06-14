@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dk44nkq5ly8jx" path="res://assets/art/backgrounds/goal-top.png" id="2_w3gav"]
 
 [node name="Goal" type="Node2D"]
+y_sort_enabled = true
 
 [node name="BottomFrameSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_sx1j4")
