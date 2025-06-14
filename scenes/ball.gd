@@ -1,6 +1,8 @@
 class_name Ball
 extends AnimatableBody2D
 
+const BOUNCINESS := 0.8
+
 enum State {CARRIED, FREEFORM, SHOT}
 
 @export var friction_air: float
