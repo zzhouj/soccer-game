@@ -44,3 +44,6 @@ func pass_to(target: Vector2) -> void:
 	velocity = direction * intensity
 	carrier = null
 	switch_state(State.FREEFORM)
+
+func stop() -> void:
+	velocity = Vector2.ZERO

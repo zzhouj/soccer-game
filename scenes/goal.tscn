@@ -1,10 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0rykeq02e2qq"]
+[gd_scene load_steps=4 format=3 uid="uid://c0rykeq02e2qq"]
 
 [ext_resource type="Texture2D" uid="uid://cqjpjfpvjmxj5" path="res://assets/art/backgrounds/goal-bottom.png" id="1_sx1j4"]
+[ext_resource type="Script" uid="uid://be7t6kuc7duqu" path="res://scenes/goal.gd" id="1_w3gav"]
 [ext_resource type="Texture2D" uid="uid://dk44nkq5ly8jx" path="res://assets/art/backgrounds/goal-top.png" id="2_w3gav"]
 
 [node name="Goal" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_w3gav")
 
 [node name="BottomFrameSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_sx1j4")
@@ -16,3 +18,12 @@ position = Vector2(0, -65)
 texture = ExtResource("2_w3gav")
 centered = false
 offset = Vector2(-23, -59)
+
+[node name="BackNetArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BackNetArea"]
+polygon = PackedVector2Array(-20, -2, -12, -65, -10, -65, -18, -2)
