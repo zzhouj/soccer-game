@@ -2,6 +2,7 @@ class_name Ball
 extends AnimatableBody2D
 
 const BOUNCINESS := 0.8
+const DISTANCE_HIGH_PASS = 130.0
 
 enum State {CARRIED, FREEFORM, SHOT}
 
@@ -44,6 +45,8 @@ func pass_to(target: Vector2) -> void:
 	var distance = position.distance_to(target)
 	var intensity = sqrt(2 * friction_ground * distance)
 	velocity = direction * intensity
+	if distance > DISTANCE_HIGH_PASS:
+		height_velocity = BallState.GRAVITY * distance / (1.8 * intensity)
 	carrier = null
 	switch_state(State.FREEFORM)
 

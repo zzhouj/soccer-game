@@ -12,5 +12,5 @@ func _physics_process(delta: float) -> void:
 	set_animation_by_velocity()
 	var friction := ball.friction_air if ball.height > 0 else ball.friction_ground
 	ball.velocity = ball.velocity.move_toward(Vector2.ZERO, friction * delta)
-	process_gravity(delta, ball.BOUNCINESS)
+	process_gravity(delta, Ball.BOUNCINESS)
 	move_and_bounce(delta)
