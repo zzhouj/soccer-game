@@ -4,6 +4,8 @@ extends PlayerState
 const HEIGHT_START := 0.1
 const HEIGHT_VELOCITY := 1.5
 const BONUS_POWER := 1.3
+const BALL_HEIGHT_MIN := 10.0
+const BALL_HEIGHT_MAX := 30.0
 
 func _enter_tree() -> void:
 	animation_player.play("header")
@@ -12,7 +14,7 @@ func _enter_tree() -> void:
 	ball_detection_area.body_entered.connect(on_ball_entered.bind())
 
 func on_ball_entered(ctx_ball: Ball) -> void:
-	if ctx_ball.can_air_connect():
+	if ctx_ball.can_air_connect(BALL_HEIGHT_MIN, BALL_HEIGHT_MAX):
 		ctx_ball.shoot(player.velocity.normalized() * player.power * BONUS_POWER)
 
 func _physics_process(delta: float) -> void:
