@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 enum ControlScheme {CPU, P1, P2}
-enum State {MOVING, TACKLING, RECOVERING, PREPPING_SHOT, SHOOTING, PASSING, HEADER, VOLLEY_KICK, BICYCLE_KICK}
+enum State {MOVING, TACKLING, RECOVERING, PREPPING_SHOT, SHOOTING, PASSING, HEADER, VOLLEY_KICK, BICYCLE_KICK, CHEST_CONTROL}
 
 const CONTROL_SCHEME_MAP: Dictionary = {
 	ControlScheme.CPU: preload("res://assets/art/props/cpu.png"),
@@ -10,6 +10,7 @@ const CONTROL_SCHEME_MAP: Dictionary = {
 	ControlScheme.P2: preload("res://assets/art/props/2p.png"),
 }
 const GRAVITY := 8.0
+const BALL_CONTROL_HEIGHT_MAX := 10.0
 
 @export var control_scheme: ControlScheme
 @export var speed: float
@@ -87,3 +88,7 @@ func process_gravity(delta: float) -> void:
 		if height <= 0:
 			height = 0
 	player_sprite.position = Vector2.UP * height
+
+func control_ball() -> void:
+	if ball.height > BALL_CONTROL_HEIGHT_MAX:
+		switch_state(State.CHEST_CONTROL)
