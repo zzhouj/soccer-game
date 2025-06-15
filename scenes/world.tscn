@@ -107,7 +107,7 @@ polygon = PackedVector2Array(14, -1, 28, -1, 13, 116, 0, 116)
 
 [node name="Player" parent="ActorsContainer" node_paths=PackedStringArray("ball", "own_goal", "target_goal") instance=ExtResource("4_k0juu")]
 position = Vector2(144, 106)
-control_scheme = null
+control_scheme = 0
 ball = NodePath("../Ball")
 own_goal = NodePath("../PitchObjects/GoalHome")
 target_goal = NodePath("../PitchObjects/GoalAway")
