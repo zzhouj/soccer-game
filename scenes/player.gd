@@ -13,6 +13,7 @@ const CONTROL_SCHEME_MAP: Dictionary = {
 }
 const GRAVITY := 8.0
 const BALL_CONTROL_HEIGHT_MAX := 10.0
+const COUNTRIES := ["DEFAULT", "FRANCE", "ARGENTINA", "BRAZIL", "ENGLAND", "GERMANY", "ITALY", "SPAIN", "USA", "CANADA"]
 
 @export var control_scheme: ControlScheme
 @export var speed: float
@@ -36,8 +37,9 @@ var height_velocity := 0.0
 var fullname := ""
 var skin_color := SkinColor.LIGHT
 var role := Role.MIDFIELD
+var country := ""
 
-func initialize(ctx_position: Vector2, ctx_ball: Ball, ctx_own_goal: Goal, ctx_target_goal: Goal, ctx_player_data: PlayerResource) -> void:
+func initialize(ctx_position: Vector2, ctx_ball: Ball, ctx_own_goal: Goal, ctx_target_goal: Goal, ctx_player_data: PlayerResource, ctx_country: String) -> void:
 	position = ctx_position
 	ball = ctx_ball
 	own_goal = ctx_own_goal
@@ -47,11 +49,13 @@ func initialize(ctx_position: Vector2, ctx_ball: Ball, ctx_own_goal: Goal, ctx_t
 	role = ctx_player_data.role
 	speed = ctx_player_data.speed
 	power = ctx_player_data.power
+	country = ctx_country
 	heading = Vector2.LEFT if target_goal.position.x < position.x else Vector2.RIGHT
 
 func _ready() -> void:
 	set_control_texture()
 	switch_state(State.MOVING)
+	set_shader_props()
 
 func _physics_process(delta: float) -> void:
 	flip_sprites()
@@ -67,6 +71,13 @@ func switch_state(state: State, state_data := PlayerStateData.new()) -> void:
 	current_state.state_transition_requested.connect(switch_state.bind())
 	current_state.name = "PlayerState: " + str(state)
 	call_deferred("add_child", current_state)
+
+func set_shader_props() -> void:
+	var country_color := COUNTRIES.find(country)
+	if country_color < 0:
+		country_color = 0
+	player_sprite.material.set_shader_parameter("skin_color", skin_color)
+	player_sprite.material.set_shader_parameter("team_color", country_color)
 
 func set_movement_animation() -> void:
 	if velocity.length() > 0:
