@@ -38,6 +38,9 @@ var fullname := ""
 var skin_color := SkinColor.LIGHT
 var role := Role.MIDFIELD
 var country := ""
+var ai_behavior := AIBehavior.new()
+var spawn_position := Vector2.ZERO
+var weight_on_duty := 0.0
 
 func initialize(ctx_position: Vector2, ctx_ball: Ball, ctx_own_goal: Goal, ctx_target_goal: Goal, ctx_player_data: PlayerResource, ctx_country: String) -> void:
 	position = ctx_position
@@ -56,6 +59,8 @@ func _ready() -> void:
 	set_control_texture()
 	switch_state(State.MOVING)
 	set_shader_props()
+	setup_ai_behavior()
+	spawn_position = position
 
 func _physics_process(delta: float) -> void:
 	flip_sprites()
@@ -67,7 +72,7 @@ func switch_state(state: State, state_data := PlayerStateData.new()) -> void:
 	if current_state != null:
 		current_state.queue_free()
 	current_state = state_factory.get_state(state)
-	current_state.setup(self, ball, own_goal, target_goal, animation_player, teammate_detection_area, ball_detection_area, state_data)
+	current_state.setup(self, ball, own_goal, target_goal, animation_player, teammate_detection_area, ball_detection_area, state_data, ai_behavior)
 	current_state.state_transition_requested.connect(switch_state.bind())
 	current_state.name = "PlayerState: " + str(state)
 	call_deferred("add_child", current_state)
@@ -78,6 +83,11 @@ func set_shader_props() -> void:
 		country_color = 0
 	player_sprite.material.set_shader_parameter("skin_color", skin_color)
 	player_sprite.material.set_shader_parameter("team_color", country_color)
+
+func setup_ai_behavior() -> void:
+	ai_behavior.setup(self, ball)
+	ai_behavior.name = "AI Behavior"
+	add_child(ai_behavior)
 
 func set_movement_animation() -> void:
 	if velocity.length() > 0:

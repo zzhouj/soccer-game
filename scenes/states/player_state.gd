@@ -11,8 +11,9 @@ var animation_player: AnimationPlayer = null
 var teammate_detection_area: Area2D = null
 var ball_detection_area: Area2D = null
 var state_data := PlayerStateData.new()
+var ai_behavior: AIBehavior = null
 
-func setup(ctx_player: Player, ctx_ball: Ball, ctx_own_goal: Goal, ctx_target_goal: Goal, ctx_animation_player: AnimationPlayer, ctx_teammate_detection_area: Area2D, ctx_ball_detection_area: Area2D, ctx_state_data: PlayerStateData) -> void:
+func setup(ctx_player: Player, ctx_ball: Ball, ctx_own_goal: Goal, ctx_target_goal: Goal, ctx_animation_player: AnimationPlayer, ctx_teammate_detection_area: Area2D, ctx_ball_detection_area: Area2D, ctx_state_data: PlayerStateData, ctx_ai_behavior: AIBehavior) -> void:
 	player = ctx_player
 	ball = ctx_ball
 	own_goal = ctx_own_goal
@@ -21,6 +22,7 @@ func setup(ctx_player: Player, ctx_ball: Ball, ctx_own_goal: Goal, ctx_target_go
 	teammate_detection_area = ctx_teammate_detection_area
 	ball_detection_area = ctx_ball_detection_area
 	state_data = ctx_state_data
+	ai_behavior = ctx_ai_behavior
 
 func transition_state(new_state: Player.State, new_state_data := PlayerStateData.new()) -> void:
 	state_transition_requested.emit(new_state, new_state_data)

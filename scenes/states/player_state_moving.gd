@@ -3,7 +3,7 @@ extends PlayerState
 
 func _physics_process(_delta: float) -> void:
 	if player.control_scheme == Player.ControlScheme.CPU:
-		pass
+		ai_behavior.process_ai()
 	else:
 		handle_player_movement()
 	player.set_movement_animation()
